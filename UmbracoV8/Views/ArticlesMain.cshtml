@@ -3,3 +3,31 @@
 @{
 	Layout = "master.cshtml";
 }
+<!-- Main -->
+<section id="main" class="wrapper">
+    <div class="container">
+
+        <header class="major special">
+            <h2>@Model.Value("articlesTitle")</h2>
+                @Model.Value("articlesBodyText")
+        </header>
+
+        @{
+	var selection = Umbraco.Content(Guid.Parse("7506a969-d4f2-49fd-acd2-9a5db77db740"))
+    .ChildrenOfType("articlesItem")
+    .Where(x => x.IsVisible())
+    .OrderByDescending(x => x.CreateDate);
+}
+<ul>
+	@foreach (var item in selection)
+	{
+		<li>
+			<a href="@item.Url">@item.Name</a>
+		</li>
+	}
+</ul>
+       
+    </div>
+</section>
+
+
